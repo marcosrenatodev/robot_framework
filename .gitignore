@@ -1,0 +1,10 @@
+.venv/
+.drivers/
+__pycache__/
+*.py[cod]
+
+# Robot Framework outputs
+output.xml
+log.html
+report.html
+selenium-screenshot-*.png
