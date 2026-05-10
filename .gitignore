@@ -4,7 +4,12 @@ __pycache__/
 *.py[cod]
 
 # Robot Framework outputs
+results/
 output.xml
 log.html
 report.html
 selenium-screenshot-*.png
+
+# WebDriver logs
+geckodriver*.log
+chromedriver*.log
