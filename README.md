@@ -24,6 +24,14 @@ chromedriver --version
 geckodriver --version
 ```
 
+## Como rodar os testes
+
+```bash
+robot --outputdir results casosdeteste.robot
+```
+
+Os arquivos gerados pela execução ficam em `results/`.
+
 Os webdrivers locais ficam em `.drivers/bin` e foram baixados dos sites oficiais:
 
 - ChromeDriver: Chrome for Testing
