@@ -1,27 +1,18 @@
 *** Settings ***
-Documentation     Casos de teste automatizados da Secretaria On-line.
+Documentation     Casos de teste automatizados para pesquisa no YouTube.
 Test Setup        Abrir browser
 Test Teardown     Fechar browser
 Resource          resource.robot
 
 *** Test Cases ***
-CT01: Realizar um requerimento geral como aluno
-    [Documentation]    Cria uma solicitação do tipo Requerimento Geral sem anexo.
-    [Tags]    aluno    requerimento-geral
-    Acessar Secretaria Online
-    Fazer login como aluno
-    Abrir nova solicitação
-    Selecionar solicitação do tipo Requerimento Geral
-    Preencher solicitação de requerimento geral
-    Salvar solicitação
-    Solicitação criada deve aparecer na lista do aluno
+Caso de Teste 1: Buscar aula de Web Service Login em Java
+    [Tags]    pesquisa
+    Acessar YouTube
+    Buscar aula de Web Service Login em Java
+    Verificar se aula do Prof. Razer aparece nos resultados
 
-CT02: Deliberar requerimento geral como secretaria
-    [Documentation]    Finaliza pela secretaria a solicitação criada pelo aluno.
-    [Tags]    secretaria    requerimento-geral
-    Acessar Secretaria Online
-    Fazer login como secretaria
-    Localizar solicitação criada e deliberar
-    Preencher deliberação finalizando a solicitação
-    Salvar deliberação
-    Solicitação deve aparecer como concluída para o aluno
+Caso de Teste 2: Buscar vídeo de Robot Framework
+    [Tags]    pesquisa
+    Acessar YouTube
+    Buscar aula de "Robot Framework SeleniumLibrary"
+    Verificar se resultados contem "Robot Framework"

@@ -4,7 +4,10 @@ Library    String
 
 *** Variables ***
 ${URL}                  http://200.236.3.198:28080/secretariaonline2/Home
+${URL_YOUTUBE}          https://www.youtube.com
 ${BROWSER}              chrome
+${ELEM_CAIXA_BUSCA}     name=search_query
+${SUBMIT_BUSCA}         xpath=//button[@aria-label='Search' or @aria-label='Pesquisar']
 ${ALUNO_LOGIN}          GRR11111111
 ${ALUNO_SENHA}          123
 ${SECRETARIA_LOGIN}     rafaela.fontana@ufpr.br
@@ -22,6 +25,42 @@ Abrir browser
 Fechar browser
     Run Keyword And Ignore Error    Capture Page Screenshot
     Close Browser
+
+Acessar YouTube
+    Go To    ${URL_YOUTUBE}
+    Aceitar cookies do YouTube se aparecer
+    Wait Until Element Is Visible    ${ELEM_CAIXA_BUSCA}    ${TIMEOUT}
+
+YouTube foi acessado
+    Acessar YouTube
+
+Buscar aula de Web Service Login em Java
+    Buscar aula de "Web Service Login em Java"
+
+Buscar aula de "${STRING_BUSCA}"
+    Input Text    ${ELEM_CAIXA_BUSCA}    ${STRING_BUSCA}
+    Click Button    ${SUBMIT_BUSCA}
+    Wait Until Element Is Visible    ${ELEM_CAIXA_BUSCA}    ${TIMEOUT}
+
+Verificar se aula do Prof. Razer aparece nos resultados
+    Wait Until Keyword Succeeds    10x    2s    Procurar texto nos resultados    Prof. Razer
+
+A aula do Prof. Razer deve aparecer nos resultados
+    Verificar se aula do Prof. Razer aparece nos resultados
+
+Verificar se resultados contem "${TEXTO_ESPERADO}"
+    Wait Until Keyword Succeeds    10x    2s    Procurar texto nos resultados    ${TEXTO_ESPERADO}
+
+Procurar texto nos resultados
+    [Arguments]    ${TEXTO_ESPERADO}
+    ${encontrou}=    Run Keyword And Return Status    Page Should Contain    ${TEXTO_ESPERADO}
+    IF    not ${encontrou}
+        Execute Javascript    window.scrollBy(0, 900)
+    END
+    Should Be True    ${encontrou}    Resultado esperado não encontrado: ${TEXTO_ESPERADO}
+
+Aceitar cookies do YouTube se aparecer
+    Run Keyword And Ignore Error    Click Button    xpath=//button[.//span[contains(., 'Aceitar tudo') or contains(., 'Accept all')]]
 
 Acessar Secretaria Online
     Go To    ${URL}
